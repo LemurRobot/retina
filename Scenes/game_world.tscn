@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://ereidrv0emeu"]
+
+[ext_resource type="Texture2D" uid="uid://b455fkrgdf1ft" path="res://Sprites/shitty_tileset.png" id="1_0nejw"]
+[ext_resource type="Shader" uid="uid://lksxoegvmbv7" path="res://Scripts/palette.gdshader" id="1_alii3"]
+[ext_resource type="Script" uid="uid://dpqwusanpkj3m" path="res://Scenes/camera.gd" id="1_d0bjv"]
+[ext_resource type="PackedScene" uid="uid://c2mtcvepi0u1p" path="res://Scenes/player.tscn" id="2_qvgq0"]
+[ext_resource type="Texture2D" uid="uid://dftplj1aw53wq" path="res://Sprites/grayscale-16-1x.png" id="3_27os8"]
+[ext_resource type="Texture2D" uid="uid://cqwwe7ryqdvch" path="res://bottom_noise.tres" id="5_rr1si"]
+[ext_resource type="AudioStream" uid="uid://33klodafx2oc" path="res://Sounds/aFamiliarRoom_2.wav" id="6_f1ejf"]
+[ext_resource type="Texture2D" uid="uid://bt7rlb56105pb" path="res://top_noise.tres" id="6_xqdar"]
+[ext_resource type="Texture2D" uid="uid://c1ui7wguduikv" path="res://Sprites/area1.webp" id="9_rr1si"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opcc2"]
+shader = ExtResource("1_alii3")
+shader_parameter/num_colors = 100
+shader_parameter/PALETTE_TEXTURE = ExtResource("3_27os8")
+shader_parameter/direction = Vector2(-0.02, 0.01)
+shader_parameter/direction_overlay = Vector2(-0.01, -0.005)
+shader_parameter/noise = ExtResource("5_rr1si")
+shader_parameter/noise_overlay = ExtResource("6_xqdar")
+shader_parameter/width = 288.0
+shader_parameter/height = 164.0
+shader_parameter/world_position = Vector2(0, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bvgre"]
+texture = ExtResource("1_0nejw")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 0, -8, 0)
+
+[sub_resource type="TileSet" id="TileSet_s45dl"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_bvgre")
+
+[node name="GameWorld" type="Node2D" unique_id=1199800961]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=858194085]
+script = ExtResource("1_d0bjv")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D" unique_id=455396226]
+
+[node name="PaletteShader" type="ColorRect" parent="Camera2D/CanvasLayer" unique_id=758263129]
+visible = false
+material = SubResource("ShaderMaterial_opcc2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2009176983]
+tile_set = SubResource("TileSet_s45dl")
+
+[node name="Player" parent="." unique_id=693249929 instance=ExtResource("2_qvgq0")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=61701520]
+stream = ExtResource("6_f1ejf")
+volume_db = -4.0
+autoplay = true
+
+[node name="Area1" type="Node2D" parent="." unique_id=1800117034]
+
+[node name="Area1Background" type="Sprite2D" parent="Area1" unique_id=1937416278]
+z_index = -1
+position = Vector2(-15, -155)
+texture = ExtResource("9_rr1si")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Area1" unique_id=1879686028]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/StaticBody2D" unique_id=44224731]
+polygon = PackedVector2Array(-361, -297, -336, -297, -319, 6, -307, 26, 309, -13, 293, -204, 293, -273, 329, -278, 328, 31, -361, 32)
+
+[node name="Book1" type="StaticBody2D" parent="Area1" unique_id=2048873725]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book1" unique_id=1807038547]
+visible = false
+polygon = PackedVector2Array(63, -1, 62, -12, 106, -15, 106, -4)
+one_way_collision = true
+
+[node name="Book2" type="StaticBody2D" parent="Area1" unique_id=1169015566]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book2" unique_id=1308077725]
+visible = false
+position = Vector2(1, -13)
+polygon = PackedVector2Array(63, -1, 62, -12, 106, -15, 106, -4)
+one_way_collision = true
+
+[node name="Book3" type="StaticBody2D" parent="Area1" unique_id=909117876]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book3" unique_id=879432224]
+position = Vector2(-1, -25)
+polygon = PackedVector2Array(67, -1, 64, -12, 106, -15, 106, -4)
+one_way_collision = true
+
+[node name="Book4" type="StaticBody2D" parent="Area1" unique_id=1523269267]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book4" unique_id=2016677755]
+position = Vector2(-4, -34)
+polygon = PackedVector2Array(63, -1, 62, -12, 106, -15, 106, -4)
+one_way_collision = true
+
+[node name="Book5" type="StaticBody2D" parent="Area1" unique_id=528278214]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book5" unique_id=900412778]
+position = Vector2(1, -44)
+polygon = PackedVector2Array(68, -2, 67, -9, 106, -12, 106, -4)
+one_way_collision = true
+
+[node name="Book6" type="StaticBody2D" parent="Area1" unique_id=1427331115]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book6" unique_id=1045273252]
+position = Vector2(-10, -50)
+polygon = PackedVector2Array(63, -1, 62, -12, 106, -15, 106, -4)
+one_way_collision = true
+
+[node name="Book7" type="StaticBody2D" parent="Area1" unique_id=1339651490]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book7" unique_id=579533794]
+position = Vector2(-1, -60)
+polygon = PackedVector2Array(67, -2, 66, -12, 96, -14, 98, -4)
+one_way_collision = true
+
+[node name="Desk" type="StaticBody2D" parent="Area1" unique_id=1005491899]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Desk" unique_id=14709306]
+position = Vector2(11, -81)
+polygon = PackedVector2Array(66, -5, 66, -12, 278, -23, 278, -18)
+one_way_collision = true
+
+[node name="Chair" type="StaticBody2D" parent="Area1" unique_id=827274859]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Chair" unique_id=746899362]
+position = Vector2(-92, -33)
+polygon = PackedVector2Array(66, -5, 66, -12, 110, -17, 112, -8)
+one_way_collision = true
+
+[node name="TV1" type="StaticBody2D" parent="Area1" unique_id=983482743]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/TV1" unique_id=809946593]
+position = Vector2(-292, -27)
+polygon = PackedVector2Array(66, -5, 66, -12, 137, -23, 139, -16)
+one_way_collision = true
+
+[node name="TV2" type="StaticBody2D" parent="Area1" unique_id=755811639]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/TV2" unique_id=1679101109]
+position = Vector2(-265, -77)
+polygon = PackedVector2Array(76, -6, 73, -18, 137, -23, 139, -16)
+one_way_collision = true
+
+[node name="TV3" type="StaticBody2D" parent="Area1" unique_id=1670523614]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/TV3" unique_id=1087455376]
+position = Vector2(-194, -22)
+polygon = PackedVector2Array(75, -9, 73, -18, 131, -21, 135, -13)
+one_way_collision = true
