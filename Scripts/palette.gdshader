@@ -50,8 +50,12 @@ void fragment() {
 	float energy = color1 * color2;
 	
 	COLOR.rgba = texture(screen_texture,UV);
-	
-	COLOR = mix(COLOR, vec4(0, 0, 0, 1), energy * 0.3);
+	float adjusted_energy = energy * 0.6 + 0.4;
+	if (adjusted_energy < 1.0) {
+		COLOR = mix(COLOR, vec4(0, 0, 0, 1), adjusted_energy);
+	} else {
+		COLOR = mix(COLOR, vec4(0, 0, 0, 1), 1.0);
+	}
 	
 	COLOR.rgb = palette_limiter(COLOR.rgb);
 	

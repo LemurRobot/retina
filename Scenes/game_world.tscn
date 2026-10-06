@@ -53,6 +53,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="ColorRect" type="ColorRect" parent="Camera2D" unique_id=2094068408]
+z_index = -1000
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -576.0
+offset_top = -324.0
+offset_right = 576.0
+offset_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.060530342, 0.060530365, 0.060530297, 1)
+
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2009176983]
 tile_set = SubResource("TileSet_s45dl")
 
@@ -171,3 +184,9 @@ visible = false
 position = Vector2(-194, -22)
 polygon = PackedVector2Array(75, -9, 73, -18, 131, -21, 135, -13)
 one_way_collision = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1756101651]
+energy = 0.0
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2095264226]
+color = Color(0.033853278, 0.033853278, 0.033853274, 1)
