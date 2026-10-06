@@ -4,16 +4,18 @@
 [ext_resource type="Shader" uid="uid://lksxoegvmbv7" path="res://Scripts/palette.gdshader" id="1_alii3"]
 [ext_resource type="Script" uid="uid://dpqwusanpkj3m" path="res://Scenes/camera.gd" id="1_d0bjv"]
 [ext_resource type="PackedScene" uid="uid://c2mtcvepi0u1p" path="res://Scenes/player.tscn" id="2_qvgq0"]
-[ext_resource type="Texture2D" uid="uid://dftplj1aw53wq" path="res://Sprites/grayscale-16-1x.png" id="3_27os8"]
+[ext_resource type="Texture2D" uid="uid://m45w3albpghj" path="res://Sprites/helpless.png" id="3_rr1si"]
 [ext_resource type="Texture2D" uid="uid://cqwwe7ryqdvch" path="res://bottom_noise.tres" id="5_rr1si"]
 [ext_resource type="AudioStream" uid="uid://33klodafx2oc" path="res://Sounds/aFamiliarRoom_2.wav" id="6_f1ejf"]
 [ext_resource type="Texture2D" uid="uid://bt7rlb56105pb" path="res://top_noise.tres" id="6_xqdar"]
 [ext_resource type="Texture2D" uid="uid://c1ui7wguduikv" path="res://Sprites/area1.webp" id="9_rr1si"]
+[ext_resource type="Shader" uid="uid://crbl34jg50ks6" path="res://Scenes/static.gdshader" id="10_xnm3i"]
+[ext_resource type="Texture2D" uid="uid://chj660ycih76y" path="res://Sprites/area1lemun.png" id="10_xqdar"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_opcc2"]
 shader = ExtResource("1_alii3")
-shader_parameter/num_colors = 100
-shader_parameter/PALETTE_TEXTURE = ExtResource("3_27os8")
+shader_parameter/num_colors = 32
+shader_parameter/PALETTE_TEXTURE = ExtResource("3_rr1si")
 shader_parameter/direction = Vector2(-0.02, 0.01)
 shader_parameter/direction_overlay = Vector2(-0.01, -0.005)
 shader_parameter/noise = ExtResource("5_rr1si")
@@ -36,6 +38,30 @@ texture = ExtResource("1_0nejw")
 [sub_resource type="TileSet" id="TileSet_s45dl"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bvgre")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_00aki"]
+noise_type = 3
+frequency = 0.5
+fractal_type = 0
+fractal_octaves = 1
+fractal_gain = 0.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l855d"]
+noise = SubResource("FastNoiseLite_00aki")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnm3i"]
+shader = ExtResource("10_xnm3i")
+shader_parameter/noise = SubResource("NoiseTexture2D_l855d")
+shader_parameter/direction = Vector2(5, 5)
+
+[sub_resource type="Environment" id="Environment_qjw6e"]
+background_mode = 3
+glow_enabled = true
+glow_intensity = 8.0
+glow_strength = 0.16
+glow_bloom = 1.0
+glow_blend_mode = 0
+glow_hdr_scale = 3.0
 
 [node name="GameWorld" type="Node2D" unique_id=1199800961]
 
@@ -82,6 +108,13 @@ autoplay = true
 z_index = -1
 position = Vector2(-15, -155)
 texture = ExtResource("9_rr1si")
+
+[node name="Area1Background2" type="Sprite2D" parent="Area1" unique_id=813232695]
+modulate = Color(107.12631, 107.12631, 107.12631, 1)
+z_index = -1
+material = SubResource("ShaderMaterial_xnm3i")
+position = Vector2(-15, -155)
+texture = ExtResource("10_xqdar")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Area1" unique_id=1879686028]
 
@@ -190,3 +223,6 @@ energy = 0.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2095264226]
 color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1840479082]
+environment = SubResource("Environment_qjw6e")

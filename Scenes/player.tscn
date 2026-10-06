@@ -35,6 +35,33 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
+[sub_resource type="Curve" id="Curve_6t5aa"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5609756, 0.6067416), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cvnsp"]
+curve = SubResource("Curve_6t5aa")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qjw6e"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(500, 300, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+angle_min = 1.0728835e-05
+angle_max = 360.00003
+spread = 180.0
+initial_velocity_max = 2.0
+gravity = Vector3(0, 0.4, 0)
+linear_accel_min = 0.49999776
+linear_accel_max = 0.99999774
+damping_min = 0.1
+damping_max = 0.1
+scale_max = 4.0
+color = Color(0.7977378, 0.7977378, 0.7977378, 1)
+alpha_curve = SubResource("CurveTexture_cvnsp")
+turbulence_enabled = true
+turbulence_noise_strength = 0.5
+
 [node name="Player" type="CharacterBody2D" unique_id=693249929 groups=["player"]]
 script = ExtResource("1_cvnsp")
 
@@ -53,3 +80,8 @@ position = Vector2(0, -27)
 energy = 1.2
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_qjw6e")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=316036226]
+amount = 100
+lifetime = 16.0
+process_material = SubResource("ParticleProcessMaterial_qjw6e")
