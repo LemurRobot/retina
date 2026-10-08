@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
 var FRICTION = 15.0
-var SPEED = 180.0
-var JUMP_VELOCITY = -160.0
-var MAX_JUMP_TIME = 0.1
+var SPEED = 160.0
+var JUMP_VELOCITY = -190.0
+var MAX_JUMP_TIME = 0.15
 
 var jump_time = 0.0
 var jump_held = -0.1
+
+var setup_anim = 0
 
 func _physics_process(delta: float) -> void:
 	if is_on_floor():
@@ -35,5 +37,31 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction: velocity.x += direction * SPEED * FRICTION * delta
 	velocity.x -= velocity.x * FRICTION * delta
-
+	
+	animate(delta)
 	move_and_slide()
+	
+func animate(delta):
+	if abs(velocity.x) <= 5:
+		if setup_anim == 1:
+			$AnimatedSprite2D.play("end_walk")
+		else:
+			$AnimatedSprite2D.play("idle")
+	else:
+		if setup_anim == 0:
+			$AnimatedSprite2D.play("pre_walk")
+		else:
+			$AnimatedSprite2D.play("walk")
+		$AnimatedSprite2D.flip_h = velocity.x < 0
+		
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	if $AnimatedSprite2D.animation == "pre_walk":
+		setup_anim = 1
+	if $AnimatedSprite2D.animation == "end_walk":
+		setup_anim = 0
+
+
+func _on_animated_sprite_2d_animation_looped() -> void:
+	if $AnimatedSprite2D.animation == "walk":
+		$Footstep.play()

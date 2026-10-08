@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://vbtvhbsj740e"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qjw6e"]
+
+[node name="LightOccluder2D" type="LightOccluder2D" unique_id=874561102]
+occluder = SubResource("OccluderPolygon2D_qjw6e")

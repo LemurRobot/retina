@@ -10,7 +10,7 @@ void vertex() {
 void fragment() {
 	vec4 base = texture(TEXTURE, UV);
 	float strength = texture(noise, UV + ( direction * TIME)).r;
-	strength = strength * 90.0 - 35.0;
+	strength = strength * 75.0 - 35.0;
 	
 	COLOR = vec4(strength, strength, strength, COLOR.a);
 }
