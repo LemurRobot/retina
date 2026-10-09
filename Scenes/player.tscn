@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bby6xe87esmd7" path="res://Scripts/player.gd" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://babn483yvrsi4" path="res://Sprites/doll_spritesheet.png" id="2_cvnsp"]
 [ext_resource type="AudioStream" uid="uid://d3vnf5ynf4dqm" path="res://Sounds/footstep.mp3" id="3_6t5aa"]
+[ext_resource type="AudioStream" uid="uid://cvqcmvfyd428b" path="res://Sounds/fall.mp3" id="4_vgqql"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_igrcy"]
 atlas = ExtResource("2_cvnsp")
@@ -210,6 +211,12 @@ random_volume_offset_db = 1.78
 streams_count = 1
 stream_0/stream = ExtResource("3_6t5aa")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_opcc2"]
+random_pitch = 1.122462
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("4_vgqql")
+
 [node name="Player" type="CharacterBody2D" unique_id=693249929 groups=["player"]]
 script = ExtResource("1_cvnsp")
 
@@ -240,6 +247,10 @@ stream = SubResource("AudioStreamRandomizer_qjw6e")
 volume_db = -3.0
 pitch_scale = 0.92
 panning_strength = 0.0
+
+[node name="Fall" type="AudioStreamPlayer2D" parent="." unique_id=1115366295]
+stream = SubResource("AudioStreamRandomizer_opcc2")
+volume_db = -9.136
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="animation_looped" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

@@ -8,10 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cqwwe7ryqdvch" path="res://Sprites/bottom_noise.tres" id="5_rr1si"]
 [ext_resource type="AudioStream" uid="uid://33klodafx2oc" path="res://Sounds/aFamiliarRoom_2.wav" id="6_f1ejf"]
 [ext_resource type="Texture2D" uid="uid://bt7rlb56105pb" path="res://Sprites/top_noise.tres" id="6_xqdar"]
-[ext_resource type="Texture2D" uid="uid://c1ui7wguduikv" path="res://Sprites/area1.webp" id="9_rr1si"]
-[ext_resource type="Shader" uid="uid://crbl34jg50ks6" path="res://Scripts/static.gdshader" id="10_xnm3i"]
-[ext_resource type="Texture2D" uid="uid://chj660ycih76y" path="res://Sprites/area1lumen.png" id="10_xqdar"]
-[ext_resource type="Script" uid="uid://da06akhoahdek" path="res://Scripts/fallthrough_platform.gd" id="12_l855d"]
+[ext_resource type="Texture2D" uid="uid://b652iyb7bttmy" path="res://Sprites/FullRoom_V2.webp" id="9_rr1si"]
+[ext_resource type="Script" uid="uid://b2wb6gctvo5lv" path="res://Scenes/canvas_modulate.gd" id="9_xqdar"]
+[ext_resource type="Texture2D" uid="uid://c1ui7wguduikv" path="res://Sprites/area1.webp" id="11_xnm3i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_opcc2"]
 shader = ExtResource("1_alii3")
@@ -39,21 +38,6 @@ texture = ExtResource("1_0nejw")
 [sub_resource type="TileSet" id="TileSet_s45dl"]
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bvgre")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_00aki"]
-noise_type = 3
-frequency = 0.5
-fractal_type = 0
-fractal_octaves = 1
-fractal_gain = 0.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l855d"]
-noise = SubResource("FastNoiseLite_00aki")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnm3i"]
-shader = ExtResource("10_xnm3i")
-shader_parameter/noise = SubResource("NoiseTexture2D_l855d")
-shader_parameter/direction = Vector2(5, 5)
 
 [sub_resource type="Environment" id="Environment_qjw6e"]
 background_mode = 3
@@ -103,139 +87,38 @@ stream = ExtResource("6_f1ejf")
 volume_db = -4.0
 autoplay = true
 
-[node name="Area1" type="Node2D" parent="." unique_id=1800117034]
-
-[node name="Area1Background" type="Sprite2D" parent="Area1" unique_id=1937416278]
-z_index = -1
-position = Vector2(-15, -155)
-texture = ExtResource("9_rr1si")
-
-[node name="Area1Background2" type="Sprite2D" parent="Area1" unique_id=813232695]
-modulate = Color(107.12631, 107.12631, 107.12631, 1)
-z_index = -1
-material = SubResource("ShaderMaterial_xnm3i")
-position = Vector2(-15, -155)
-texture = ExtResource("10_xqdar")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Area1" unique_id=1879686028]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/StaticBody2D" unique_id=44224731]
-polygon = PackedVector2Array(-361, -297, -336, -297, -319, 6, -307, 26, 309, -13, 293, -204, 293, -273, 329, -278, 328, 31, -361, 32)
-
-[node name="Book1" type="StaticBody2D" parent="Area1" unique_id=2048873725]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book1" unique_id=1807038547]
-visible = false
-polygon = PackedVector2Array(63, -1, 62, -12, 106, -15, 106, -4)
-one_way_collision = true
-
-[node name="Book2" type="StaticBody2D" parent="Area1" unique_id=1169015566]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book2" unique_id=1308077725]
-visible = false
-position = Vector2(1, -13)
-polygon = PackedVector2Array(63, -1, 62, -12, 106, -15, 106, -4)
-one_way_collision = true
-
-[node name="Book3" type="StaticBody2D" parent="Area1" unique_id=909117876]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book3" unique_id=879432224]
-position = Vector2(-1, -25)
-polygon = PackedVector2Array(67, -1, 64, -12, 106, -15, 106, -4)
-one_way_collision = true
-
-[node name="Book4" type="StaticBody2D" parent="Area1" unique_id=1523269267]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book4" unique_id=2016677755]
-position = Vector2(-4, -34)
-polygon = PackedVector2Array(63, -1, 62, -12, 106, -15, 106, -4)
-one_way_collision = true
-
-[node name="Book5" type="StaticBody2D" parent="Area1" unique_id=528278214]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book5" unique_id=900412778]
-position = Vector2(1, -44)
-polygon = PackedVector2Array(68, -2, 67, -9, 106, -12, 106, -4)
-one_way_collision = true
-
-[node name="Book6" type="StaticBody2D" parent="Area1" unique_id=1427331115]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book6" unique_id=1045273252]
-position = Vector2(-10, -50)
-polygon = PackedVector2Array(63, -1, 62, -12, 106, -15, 106, -4)
-one_way_collision = true
-
-[node name="Book7" type="StaticBody2D" parent="Area1" unique_id=1339651490]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Book7" unique_id=579533794]
-position = Vector2(-1, -60)
-polygon = PackedVector2Array(67, -2, 66, -12, 96, -14, 98, -4)
-one_way_collision = true
-
-[node name="Desk" type="StaticBody2D" parent="Area1" unique_id=1005491899]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Desk" unique_id=14709306]
-position = Vector2(11, -81)
-polygon = PackedVector2Array(66, -5, 66, -12, 278, -23, 278, -18)
-one_way_collision = true
-
-[node name="Chair" type="StaticBody2D" parent="Area1" unique_id=827274859]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/Chair" unique_id=746899362]
-position = Vector2(-92, -33)
-polygon = PackedVector2Array(66, -5, 66, -12, 110, -17, 112, -8)
-one_way_collision = true
-
-[node name="TV1" type="StaticBody2D" parent="Area1" unique_id=983482743]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/TV1" unique_id=809946593]
-position = Vector2(-292, -27)
-polygon = PackedVector2Array(66, -5, 66, -12, 137, -23, 139, -16)
-one_way_collision = true
-
-[node name="TV2" type="StaticBody2D" parent="Area1" unique_id=755811639]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/TV2" unique_id=1679101109]
-position = Vector2(-265, -77)
-polygon = PackedVector2Array(76, -6, 73, -18, 137, -23, 139, -16)
-one_way_collision = true
-
-[node name="TV3" type="StaticBody2D" parent="Area1" unique_id=1670523614]
-visible = false
-script = ExtResource("12_l855d")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area1/TV3" unique_id=1087455376]
-position = Vector2(-194, -22)
-polygon = PackedVector2Array(75, -9, 73, -18, 131, -21, 135, -13)
-one_way_collision = true
-
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=1756101651]
 energy = 0.0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2095264226]
+visible = false
 color = Color(0.033853278, 0.033853278, 0.033853274, 1)
+script = ExtResource("9_xqdar")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1840479082]
 environment = SubResource("Environment_qjw6e")
+
+[node name="World" type="Node2D" parent="." unique_id=83188096]
+
+[node name="LevelTexture" type="Node2D" parent="World" unique_id=1140492094]
+
+[node name="Sprite2D" type="Sprite2D" parent="World/LevelTexture" unique_id=398981026]
+z_index = -1
+position = Vector2(1323.7999, 472.29993)
+scale = Vector2(2.35, 2.35)
+texture = ExtResource("9_rr1si")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World/LevelTexture" unique_id=1556669009]
+position = Vector2(758.7999, 276.29993)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/LevelTexture/StaticBody2D" unique_id=59456299]
+position = Vector2(565, 196)
+scale = Vector2(2.35, 2.35)
+polygon = PackedVector2Array(-633, -251, -620, -261.5, 223, -260, 226, -225, 314, -224, 313, -100, 130, -100, 130, -55, 116, -55, 115, -28, 120, -23, 340, -23, 348, -32, 347, -106, 337, -105, 331, -114, 324, -226, 337, -226, 337, -262, 591, -281, 596, -122, 369, -106, 371, -13, 359, 0, 91, 0, 91, -72.5, -205.5, -72.5, -201, 97, 66, 100, 68, 143, 242, 145, 247, 113, 614, 118, 616, 279, -286, 283, -289, -71.5, -614.5, -70.5, -632, -95, -632, -250, -768, -250, -768, 449, 762, 449, 762, -424, -773, -424, -768, -252)
+
+[node name="Sprite2D2" type="Sprite2D" parent="World/LevelTexture" unique_id=622453884]
+visible = false
+position = Vector2(2209, -29)
+texture = ExtResource("11_xnm3i")
+
+[node name="Nursery" type="Node2D" parent="World/LevelTexture" unique_id=1753262171]
