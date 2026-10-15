@@ -1,6 +1,37 @@
 [gd_scene format=3 uid="uid://vbtvhbsj740e"]
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qjw6e"]
+[ext_resource type="Script" uid="uid://brs55kmgo6ma" path="res://Scripts/florescent_light.gd" id="1_8e04n"]
 
-[node name="LightOccluder2D" type="LightOccluder2D" unique_id=874561102]
+[sub_resource type="Gradient" id="Gradient_tx5mt"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.08510638, 0.18439716, 0.29078013, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.81326085, 0.81326085, 0.81326085, 1, 0.44054097, 0.44054097, 0.44054097, 1, 0.24822694, 0.24822694, 0.24822694, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t2mj5"]
+gradient = SubResource("Gradient_tx5mt")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qjw6e"]
+polygon = PackedVector2Array(-8, 2, -8, -2, 8, -2, 8, 2, 7.5, 2, 7.5, -1.5, -7.5, -1.5, -7.5, 2)
+
+[node name="FluorescentLight" type="Node2D" unique_id=1298880161]
+script = ExtResource("1_8e04n")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=286865648]
+position = Vector2(0, -1)
+energy = 2.0
+range_item_cull_mask = 3
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 5.0
+shadow_item_cull_mask = 3
+texture = SubResource("GradientTexture2D_t2mj5")
+
+[node name="Occluder" type="LightOccluder2D" parent="." unique_id=874561102]
+scale = Vector2(3, 2)
 occluder = SubResource("OccluderPolygon2D_qjw6e")
+occluder_light_mask = 2

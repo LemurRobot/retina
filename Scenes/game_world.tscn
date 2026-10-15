@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b652iyb7bttmy" path="res://Sprites/FullRoom_V2.webp" id="9_rr1si"]
 [ext_resource type="Script" uid="uid://b2wb6gctvo5lv" path="res://Scenes/canvas_modulate.gd" id="9_xqdar"]
 [ext_resource type="Texture2D" uid="uid://c1ui7wguduikv" path="res://Sprites/area1.webp" id="11_xnm3i"]
+[ext_resource type="PackedScene" uid="uid://vbtvhbsj740e" path="res://Scenes/fluorescent_light.tscn" id="12_l855d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_opcc2"]
 shader = ExtResource("1_alii3")
@@ -122,3 +123,6 @@ position = Vector2(2209, -29)
 texture = ExtResource("11_xnm3i")
 
 [node name="Nursery" type="Node2D" parent="World/LevelTexture" unique_id=1753262171]
+
+[node name="Light" parent="World/LevelTexture" unique_id=874561102 instance=ExtResource("12_l855d")]
+position = Vector2(136, 180)
